@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import '../App.css'
 import { auth } from '../firebase'
 import {signInWithEmailAndPassword} from 'firebase/auth'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 
 function Connexion() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [user, setUser] = useState(null)
 
   const send = async ev => {
     ev.preventDefault()
@@ -19,12 +20,13 @@ function Connexion() {
         email,
         password,
       )
-
-      console.log(userCredential.user)
+      setUser(userCredential.user)
     } catch (e) {
       setError(e.message)
     }
   }
+
+  if(null !== user) return <Redirect to="/"></Redirect>
 
   return (
     <div>
