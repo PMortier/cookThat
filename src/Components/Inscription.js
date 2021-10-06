@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import '../App.css'
 import { auth } from '../firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 
 function Inscription() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
 
   const send = async ev => {
     ev.preventDefault()
@@ -18,8 +19,11 @@ function Inscription() {
       password,
     )
 
-    console.log(userCredential.user)
+    setUser(userCredential.user)
+
   }
+
+  if (null !== user) return <Redirect to="/connexion"></Redirect>
 
   return (
     <div>
