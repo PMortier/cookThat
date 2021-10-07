@@ -5,6 +5,7 @@ import {signInWithEmailAndPassword } from 'firebase/auth'
 import { Link } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 import Modal from 'react-modal'
+import classes from './Connexion.module.css'
 
 const customStyles = {
   content: {
@@ -50,7 +51,7 @@ function Connexion({user, setUser, setModalConnexionOpen, modalConnexionOpen, se
       <button onClick={()=>setModalConnexionOpen(false)}><FontAwesome name="times"/></button>
       <h1>Connexion</h1>
       <form onSubmit={send}>
-        <div>
+        <div className={classes.containerLabelInput}>
           <label htmlFor="email">Votre email:</label>
           <input
             type="email"
@@ -59,7 +60,7 @@ function Connexion({user, setUser, setModalConnexionOpen, modalConnexionOpen, se
             onChange={e => setEmail(e.target.value)}
           />
         </div>
-        <div>
+        <div className={classes.containerLabelInput}>
           <label htmlFor="password">Votre mot de passe:</label>
           <input
             type="password"
@@ -69,8 +70,8 @@ function Connexion({user, setUser, setModalConnexionOpen, modalConnexionOpen, se
           />
         </div>
         {error && <p>{error}</p>}
-        <div>
-          <button type="submit">Connexion</button>
+        <div className={classes.containerSubmit}>
+          <button type="submit" className={classes.submit}>Connexion</button>
         </div>
       </form>
       <Link to="/inscription" onClick={()=>{

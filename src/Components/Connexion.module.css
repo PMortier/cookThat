@@ -1,0 +1,19 @@
+.containerSubmit{
+    text-align: center;
+}
+
+.submit{
+    background-color:green;
+    color:white;
+    border:1px solid black;
+    border-radius:5px;
+    padding:5px 15px 5px 15px;
+    margin:20px;
+    font-size: 1em;
+}
+
+.containerLabelInput{
+    margin-bottom:10px;
+    display:flex;
+    flex-direction:column;
+}

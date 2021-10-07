@@ -1,7 +1,7 @@
 import { getAuth } from "firebase/auth";
 import { Redirect } from 'react-router-dom';
 
-function profil({user}){
+function Profil({user}){
     if(!user){
         return <Redirect to="/"></Redirect>
     }
@@ -15,4 +15,4 @@ function profil({user}){
 
 }
 
-export default profil
+export default Profil

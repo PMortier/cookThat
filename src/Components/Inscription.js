@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { Redirect } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 import Modal from 'react-modal'
+import classes from './Inscription.module.css'
 
 const customStyles = {
   content: {
@@ -48,7 +49,7 @@ function Inscription({user, setUser, setModalInscriptionOpen, modalInscriptionOp
       <button onClick={()=>setModalInscriptionOpen(false)}><FontAwesome name="times"/></button>
       <h1>Inscription</h1>
       <form onSubmit={send}>
-        <div>
+        <div className={classes.containerLabelInput}>
           <label htmlFor="email">Votre email:</label>
           <input
             type="email"
@@ -57,7 +58,7 @@ function Inscription({user, setUser, setModalInscriptionOpen, modalInscriptionOp
             onChange={e => setEmail(e.target.value)}
           />
         </div>
-        <div>
+        <div className={classes.containerLabelInput}>
           <label htmlFor="password">Votre mot de passe:</label>
           <input
             type="password"
@@ -66,8 +67,8 @@ function Inscription({user, setUser, setModalInscriptionOpen, modalInscriptionOp
             onChange={e => setPassword(e.target.value)}
           />
         </div>
-        <div>
-          <button type="submit">Inscription</button>
+        <div className={classes.containerSubmit}>
+          <button type="submit" className={classes.submit}>Inscription</button>
         </div>
       </form>
     </div>
