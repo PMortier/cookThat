@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import '../App.css'
 import { auth } from '../firebase'
-import {signInWithEmailAndPassword, setPersistence, browserSessionPersistence} from 'firebase/auth'
-import { Link, Redirect } from 'react-router-dom';
+import {signInWithEmailAndPassword } from 'firebase/auth'
+import { Link } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 import Modal from 'react-modal'
 
@@ -18,7 +18,7 @@ const customStyles = {
 };
 
 
-function Connexion({user, setUser, setModalOpen, modalOpen}) {
+function Connexion({user, setUser, setModalConnexionOpen, modalConnexionOpen, setModalInscriptionOpen}) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -33,36 +33,22 @@ function Connexion({user, setUser, setModalOpen, modalOpen}) {
         password,
       )
       setUser(userCredential.user)
-      setModalOpen(false)
+      setModalConnexionOpen(false)
     } catch (e) {
       setError(e.message)
     }
   }
-
-  useEffect(()=>{
-    if(null !== user) {
-    setPersistence(auth, browserSessionPersistence)
-    .then(() => {
-
-    })
-    .catch((error) => {
-      return (error.message);
-    })
-      return <Redirect to="/dernieresrecettes"></Redirect>
-    }
-  },[])
-  
   
   return (
     <Modal
-        isOpen={modalOpen}
+        isOpen={modalConnexionOpen}
         shouldCloseOnOverlayClick={true}
-        onRequestClose={()=>setModalOpen(false)}
+        onRequestClose={()=>setModalConnexionOpen(false)}
         style={customStyles}
         contentLabel="Example Modal"
         > 
     <div>
-      <button onClick={()=>setModalOpen(false)}><FontAwesome name="times"/></button>
+      <button onClick={()=>setModalConnexionOpen(false)}><FontAwesome name="times"/></button>
       <h1>Connexion</h1>
       <form onSubmit={send}>
         <div>
@@ -88,7 +74,10 @@ function Connexion({user, setUser, setModalOpen, modalOpen}) {
           <button type="submit">Connexion</button>
         </div>
       </form>
-      <Link to="/inscription">Créer un compte</Link>
+      <Link to="/inscription" onClick={()=>{
+        setModalConnexionOpen(false)
+        setModalInscriptionOpen(true)
+        }}>Créer un compte</Link>
     </div>
     </Modal>
   )

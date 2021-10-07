@@ -2,13 +2,24 @@ import React, { useState } from 'react'
 import '../App.css'
 import { auth } from '../firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
+import Modal from 'react-modal'
 
-function Inscription() {
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
+function Inscription({user, setUser, setModalInscriptionOpen, modalInscriptionOpen}) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState(null)
 
   const send = async ev => {
     ev.preventDefault()
@@ -26,8 +37,15 @@ function Inscription() {
   if (null !== user) return <Redirect to="/connexion"></Redirect>
 
   return (
+    <Modal
+        isOpen={modalInscriptionOpen}
+        shouldCloseOnOverlayClick={true}
+        onRequestClose={()=>setModalInscriptionOpen(false)}
+        style={customStyles}
+        contentLabel="Example Modal"
+        > 
     <div>
-      <Link to="/"><FontAwesome name="times"/></Link>
+      <button onClick={()=>setModalInscriptionOpen(false)}><FontAwesome name="times"/></button>
       <h1>Inscription</h1>
       <form onSubmit={send}>
         <div>
@@ -53,6 +71,7 @@ function Inscription() {
         </div>
       </form>
     </div>
+    </Modal>
   )
 }
 
