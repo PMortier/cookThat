@@ -2,7 +2,7 @@ import classes from './Navbar.module.css'
 import { NavLink } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome'
 
-function NavBar({ user, setModalOpen }){
+function NavBar({ user, setModalConnexionOpen }){
     const handleProfileClick = ev => {
         if (user) {
             return
@@ -10,12 +10,12 @@ function NavBar({ user, setModalOpen }){
 
         ev.preventDefault()
 
-        setModalOpen(true)
+        setModalConnexionOpen(true)
     }
     
     return(
         <div className={classes.container}>
-            <NavLink exact to="/dernieresrecettes" className={`${classes.containerIcon}`} activeClassName={`${classes.active}`}>
+            <NavLink exact to="/" className={`${classes.containerIcon}`} activeClassName={`${classes.active}`}>
                 <FontAwesome name="home" className={`${classes.icon}`} />
             </NavLink>
             <NavLink exact to="/ajoutrecette" activeClassName={`${classes.active}`} className={`${classes.containerIcon}`}>

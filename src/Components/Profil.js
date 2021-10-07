@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 function profil({user}){
     if(!user){
-        return <Redirect to="/dernieresrecettes"></Redirect>
+        return <Redirect to="/"></Redirect>
     }
         return (
              <div>
