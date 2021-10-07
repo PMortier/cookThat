@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import classes from './AjoutRecette.module.css'
+import FontAwesome from 'react-fontawesome';
 
 function CreateRecette({user}) {
     const [name, setName] = useState("")
@@ -20,6 +21,7 @@ function CreateRecette({user}) {
                 <h2>Nom de la recette</h2>
                 <input type="text" placeholder="Nom de la recette" />
                 <h2>Photo</h2>
+                <FontAwesome name="image" className={classes.photo}/>
                 <button>Télécharger photo</button>
                 <h2>Difficulté</h2>
                 <select name="level" id="level">

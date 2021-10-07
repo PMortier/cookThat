@@ -1,4 +1,4 @@
-import { getAuth } from "firebase/auth";
+import { auth } from '../firebase.js';
 import { Redirect } from 'react-router-dom';
 
 function Profil({user}){
