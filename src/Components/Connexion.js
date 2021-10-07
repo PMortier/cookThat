@@ -45,7 +45,6 @@ function Connexion({user, setUser, setModalConnexionOpen, modalConnexionOpen, se
         shouldCloseOnOverlayClick={true}
         onRequestClose={()=>setModalConnexionOpen(false)}
         style={customStyles}
-        contentLabel="Example Modal"
         > 
     <div>
       <button onClick={()=>setModalConnexionOpen(false)}><FontAwesome name="times"/></button>
