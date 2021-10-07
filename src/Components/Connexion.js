@@ -1,15 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../App.css'
 import { auth } from '../firebase'
-import {signInWithEmailAndPassword} from 'firebase/auth'
+import {signInWithEmailAndPassword, setPersistence, browserSessionPersistence} from 'firebase/auth'
 import { Link, Redirect } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
+import Modal from 'react-modal'
 
-function Connexion() {
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
+
+function Connexion({user, setUser, setModalOpen, modalOpen}) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  const [user, setUser] = useState(null)
 
   const send = async ev => {
     ev.preventDefault()
@@ -21,16 +33,36 @@ function Connexion() {
         password,
       )
       setUser(userCredential.user)
+      setModalOpen(false)
     } catch (e) {
       setError(e.message)
     }
   }
 
-  if(null !== user) return <Redirect to="/"></Redirect>
+  useEffect(()=>{
+    if(null !== user) {
+    setPersistence(auth, browserSessionPersistence)
+    .then(() => {
 
+    })
+    .catch((error) => {
+      return (error.message);
+    })
+      return <Redirect to="/dernieresrecettes"></Redirect>
+    }
+  },[])
+  
+  
   return (
+    <Modal
+        isOpen={modalOpen}
+        shouldCloseOnOverlayClick={true}
+        onRequestClose={()=>setModalOpen(false)}
+        style={customStyles}
+        contentLabel="Example Modal"
+        > 
     <div>
-      <Link to="/"><FontAwesome name="times"/></Link>
+      <button onClick={()=>setModalOpen(false)}><FontAwesome name="times"/></button>
       <h1>Connexion</h1>
       <form onSubmit={send}>
         <div>
@@ -58,6 +90,7 @@ function Connexion() {
       </form>
       <Link to="/inscription">Créer un compte</Link>
     </div>
+    </Modal>
   )
 }
 
