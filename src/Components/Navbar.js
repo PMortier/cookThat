@@ -2,7 +2,17 @@ import classes from './Navbar.module.css'
 import { NavLink } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome'
 
-function navbar(){
+function NavBar({ user, setModalOpen }){
+    const handleProfileClick = ev => {
+        if (user) {
+            return
+        }
+
+        ev.preventDefault()
+
+        setModalOpen(true)
+    }
+    
     return(
         <div className={classes.container}>
             <NavLink exact to="/dernieresrecettes" className={`${classes.containerIcon}`} activeClassName={`${classes.active}`}>
@@ -13,7 +23,7 @@ function navbar(){
                 <FontAwesome className={`${classes.icon}`} name="plus-square"/>
                 </div>
             </NavLink>
-            <NavLink exact to="/profil" activeClassName={`${classes.active}`} className={`${classes.containerIcon}`}>
+            <NavLink exact to="/profil" onClick={handleProfileClick} activeClassName={`${classes.active}`} className={`${classes.containerIcon}`}>
                 <div>
                 <FontAwesome className={`${classes.icon}`} name="user"/>
                 </div>
@@ -22,4 +32,4 @@ function navbar(){
     )
 }
 
-export default navbar
+export default NavBar
