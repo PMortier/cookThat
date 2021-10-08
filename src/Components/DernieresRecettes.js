@@ -32,7 +32,7 @@ function DernieresRecettes({ setRecette }){
             {recettes.map(recette => (
                 <div key={recette.id}>
                     <Link to={`/recette/${recette.id}`} onClick={()=>setRecette(recette)}><img src={recette.file} alt={`Image de ${recette.name}`} className={classes.image}/></Link>
-                    <p>{recette.name}</p>
+                    <h2 className={classes.name}>{recette.name}</h2>
                     <p>Difficulté : {recette.level}</p>
                     <p>Temps de préparation : {recette.preparationTime} minutes</p>
                 </div>
