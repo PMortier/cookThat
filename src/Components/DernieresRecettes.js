@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react'
 import { collection, getDocs } from 'firebase/firestore'
+import { ref, getDownloadURL } from 'firebase/storage'
+import { storage } from '../firebase.js'
 import { db } from '../firebase.js'
+
 
 function DernieresRecettes(){
     const [recettes, setRecettes] = useState([])
     
+    //Récupération des recettes de la BDD
     useEffect(() => {
         const getRecettes = async () => {
             const collectionReference = collection(db, 'recettes')
@@ -22,14 +26,13 @@ function DernieresRecettes(){
         getRecettes()
     },[])
 
-    //Récupérer le l'image dans le storage
 
     return(
         <div>
             <h1>Dernières recettes</h1>
             {recettes.map(recette => (
-                <div>
-                    <img src="" alt={recette.Name} />
+                <div key={recette.id}>
+                    <img src="" alt={`Image de ${recette.Name}`} />
                     <p>{recette.Name}</p>
                     <p>Difficulté : {recette.Level}</p>
                     <p>Temps de préparation : {recette.Preparation} minutes</p>
