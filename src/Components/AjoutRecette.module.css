@@ -1,10 +1,9 @@
 .container {
-    padding:15px;
-    margin-bottom:60px;
+    margin:5px auto 80px auto;
+    width:90%;
 }
 
 input, select {
-    margin-left:20px;
     padding:10px;
     width:200px;
     border:1px solid silver;
@@ -12,22 +11,31 @@ input, select {
 }
 
 textarea{
-    margin-left:20px;
     border:1px solid silver;
     border-radius:5px;
 }
 
 button{
     margin-top:10px;
-    margin-left:20px;
 }
 
 .submit {
     background-color: rgb(16, 128, 16);
     color:white;
-    width:33%;
+    width:240px;
     height:1.7em;
     border:1px solid black;
     border-radius:7px;
     font-size:1.5em;
+    cursor: pointer;
+}
+
+.submit:active {
+    opacity:0.6;
+}
+
+.photo{
+    font-size:2em;
+    margin:5px;
+    color:grey;
 }
