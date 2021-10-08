@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { collection, getDocs } from 'firebase/firestore'
-import { ref, getDownloadURL } from 'firebase/storage'
-import { storage } from '../firebase.js'
 import { db } from '../firebase.js'
+import classes from './DernieresRecettes.module.css'
+import { Link } from 'react-router-dom'
 
 
-function DernieresRecettes(){
+function DernieresRecettes({ setRecette }){
     const [recettes, setRecettes] = useState([])
     
     //Récupération des recettes de la BDD
@@ -26,16 +26,15 @@ function DernieresRecettes(){
         getRecettes()
     },[])
 
-
     return(
-        <div>
+        <div className={classes.container}>
             <h1>Dernières recettes</h1>
             {recettes.map(recette => (
                 <div key={recette.id}>
-                    <img src="" alt={`Image de ${recette.Name}`} />
-                    <p>{recette.Name}</p>
-                    <p>Difficulté : {recette.Level}</p>
-                    <p>Temps de préparation : {recette.Preparation} minutes</p>
+                    <Link to={`/recette/${recette.id}`} onClick={()=>setRecette(recette)}><img src={recette.file} alt={`Image de ${recette.name}`} className={classes.image}/></Link>
+                    <p>{recette.name}</p>
+                    <p>Difficulté : {recette.level}</p>
+                    <p>Temps de préparation : {recette.preparationTime} minutes</p>
                 </div>
             ))}
         </div>

@@ -9,21 +9,24 @@ import DernieresRecettes from './Components/DernieresRecettes.js'
 import AjoutRecette from './Components/AjoutRecette.js'
 import Profil from './Components/Profil.js'
 import Bienvenue from './Components/Bienvenue.js'
+import Recette from './Components/Recette.js'
 
 function App() {
   const [modalConnexionOpen, setModalConnexionOpen] = useState(false)
   const [modalInscriptionOpen, setModalInscriptionOpen] = useState(false)
   const [modalBienvenueOpen, setModalBienvenueOpen] = useState(false)
   const [user, setUser] = useState(null)
+  const [recette, setRecette] = useState(null)
 
   return (
     <BrowserRouter>
       <div className="App">
         <Deconnexion setUser={setUser}/>
-        <Route path="/" exact strict><DernieresRecettes /></Route>
+        <Route path="/" exact strict><DernieresRecettes setRecette={setRecette}/></Route>
         <Route path="/ajoutrecette" exact strict><AjoutRecette user={user}/></Route>
         <Route path="/profil" exact strict><Profil user={user}/></Route>
-        
+        <Route path="/recette/:recetteId" exact strict><Recette recette={recette}/></Route>
+
         <Connexion user={user} setUser={setUser} setModalConnexionOpen={setModalConnexionOpen} modalConnexionOpen={modalConnexionOpen} setModalInscriptionOpen={setModalInscriptionOpen}/>
 
         <Inscription user={user} setUser={setUser} setModalInscriptionOpen={setModalInscriptionOpen} modalInscriptionOpen={modalInscriptionOpen} />
