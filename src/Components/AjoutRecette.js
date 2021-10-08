@@ -74,7 +74,8 @@ function CreateRecette({user}) {
                 <FontAwesome name="image" className={classes.photo}/>
                 <input type="file" id="photo" onChange={handlePhoto}/>
                 <h2>Difficulté</h2>
-                <select name="level" id="level" onChange={changeLevel}>
+                <select name="level" id="level" onChange={changeLevel} required>
+                    <option value="" disabled selected hidden>Choisir une difficulté</option>
                     <option value="facile">Facile</option>
                     <option value="moyen">Moyen</option>
                     <option value="difficile">Difficile</option>
