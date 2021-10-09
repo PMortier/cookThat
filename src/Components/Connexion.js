@@ -74,7 +74,8 @@ function Connexion({user, setUser, setModalConnexionOpen, modalConnexionOpen, se
           <button type="submit" className={classes.submit}>Connexion</button>
         </div>
       </form>
-      <Link to="/inscription" onClick={()=>{
+      <Link to="/inscription" onClick={e => {
+        e.preventDefault()
         setModalConnexionOpen(false)
         setModalInscriptionOpen(true)
         }}>Créer un compte</Link>
